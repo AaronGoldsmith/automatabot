@@ -1,7 +1,9 @@
-// Generic automata board
-class Board {
-  constructor(challenge) {
-    this.challenge = challenge;
+import React from "react"
+
+class Board extends React.Component{
+  constructor(props) {
+    super(props)
+    this.challenge = props.challenge;
   }
 
   getNextBoard() {
@@ -49,5 +51,6 @@ class Board {
         .replace(/1/g, "⦿")
     );
   }
+
 }
 export default Board;

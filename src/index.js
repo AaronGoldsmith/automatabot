@@ -1,15 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
-import rootReducer from "./rootReducer";
+import rootReducer from "./reducers/rootReducer";
 import ReduxThunk from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import GameController from "./components/GameController";
 import "./Game.css";
 function App() {
+  const [running, setRunning] = useState(false)
   return (
     <div className="App">
-      <GameController />
+      <GameController running={running} toggleRun={()=>setRunning(!running)} />
     </div>
   );
 }

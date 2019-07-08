@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CHALLENGE, SET_PATH } from "./constants";
+import { GET_CHALLENGE, SET_PATH, SET_RESULT } from "./constants";
 const domain = "https://api.noopschallenge.com";
 const path = "/automatabot/challenges/start"; //   or new
 const headers = { "content-type": "application/json" };
@@ -25,10 +25,13 @@ export function getGame() {
 }
 
 export function sendGame(url, data) {
-  axios
-    .post(url, data, { headers })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => console.log(error));
+  return dispatch => {
+    axios.post(url, data, { headers })
+      .then(response => {
+        console.log(response);
+        dispatch({type: SET_RESULT,
+        data: response.result})
+      })
+      .catch(error => console.log(error));
+  }
 }

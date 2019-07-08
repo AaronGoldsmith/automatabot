@@ -7,3 +7,4 @@ export const axios_post = (url, body, headers) =>
 
 export const GET_CHALLENGE = "GET_BOARD";
 export const SET_PATH = "SET_PATH";
+export const SET_RESULT = "SET_RESULT"
