@@ -1,13 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Game from "./Game";
+import rootReducer from "./rootReducer";
+import ReduxThunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import GameController from "./components/GameController";
+import "./Game.css";
 function App() {
   return (
     <div className="App">
-      <Game />
+      <GameController />
     </div>
   );
 }
-
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const storeWithThunk = createStore(
+  rootReducer,
+  {},
+  applyMiddleware(ReduxThunk)
+);
+ReactDOM.render(
+  <Provider store={storeWithThunk}>
+    <App />
+  </Provider>,
+  rootElement
+);
