@@ -1,7 +1,9 @@
+// TODO: determine why longer boards (vs taller) break prog
+//          
 import axios from "axios";
 import { GET_CHALLENGE, SET_PATH, SET_RESULT } from "./constants";
 const domain = "https://api.noopschallenge.com";
-const path = "/automatabot/challenges/start"; //   or new
+const path = "/automatabot/challenges/new"; //   or new
 const headers = { "content-type": "application/json" };
 
 export function getGame() {

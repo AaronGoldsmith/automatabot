@@ -1,11 +1,11 @@
 // TODO: - age to n
 //       - performance optimze (no violation msg)
-//       - check on functionality of play / pause
-
+//       - display game info
 import React from "react";
 import { connect } from "react-redux";
 import { CellGrid, getNextBoard } from "./GameBoard"
 import { getGame, sendGame } from "../actions";
+import InfoView from "./InfoView"
 
 // handleSend = () => {
 //   // deconstruct from state
@@ -20,14 +20,12 @@ class GameController extends React.Component {
     super(props);
     this.state = { running: false, generation: 0 };
     this.timer = undefined;
-    this.age = 0;
   }
 
   handleSend = () => {
-    // deconstruct from state
     const { url, challenge } = this.state;
     const { cells } = challenge;
-    this.props.sendGame(url, { cells });
+    this.props.sendGame(url , { cells });
   };
   updateBoard = () => {
     const { challenge, generation } = this.state;
@@ -39,14 +37,11 @@ class GameController extends React.Component {
 
   tick = () => {
     const { running } = this.state;
-
-    if (!this.timer && running) {
-      this.timer = setInterval(this.updateBoard, 100)
+    if (running) {
+        this.timer = setInterval(this.updateBoard, 100)
     }
-    else { this.tock() }
+    else { clearInterval(this.timer) }
   }
-
-  tock() { clearInterval(this.timer) }
 
   ageToCompletion = () =>  {
     const { challenge, generation } = this.state;
@@ -56,11 +51,11 @@ class GameController extends React.Component {
     }
 
 
-
-
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.Challenge !== prevProps.Challenge && this.props.Challenge) {
-      this.setState({ challenge: this.props.Challenge });
+    const {Challenge} = this.props;
+    if (Challenge !== prevProps.Challenge && Challenge) {
+      console.log(Challenge.rules)
+      this.setState({ challenge: Challenge });
     }
     if (prevState.running !== this.state.running) {
       this.tick();
@@ -71,6 +66,7 @@ class GameController extends React.Component {
   componentDidMount() {
     this.props.getGame();
   }
+
   handleRun = () => {
     const { running } = this.state
     this.setState({ running: !running })
@@ -78,17 +74,22 @@ class GameController extends React.Component {
 
   render() {
     const { challenge, running } = this.state;
+    const rules = challenge ? challenge.rules : null;
     const cells = challenge ? challenge.cells : null;
-    const ageTo = challenge ? challenge.generations : 0;
     return (
-      <React.Fragment>
+      <div className="appWrap">
+      <div className="cellWrap">
         <CellGrid cells={cells} />
-        {/* <GameBoard challenge={challenge} running={running} /> */}
-        <button onClick={this.handleSend}>send</button>
-        <button onClick={this.handleRun}>{running ? 'pause' : 'start'}</button>
-        {/* <button onClick={this.ageToCompletion}>{`age to ${ageTo}`}</button> */}
+      </div>
+       
 
-      </React.Fragment>
+        <InfoView rules={rules} />
+           
+        <div className="actnBtns">
+            <button onClick={this.handleSend}>send</button>
+            <button onClick={this.handleRun}>{running ? 'pause' : 'start'}</button>
+          </div>
+      </div>
     );
   }
 }

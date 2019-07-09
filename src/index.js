@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import rootReducer from "./reducers/rootReducer";
 import ReduxThunk from "redux-thunk";
-import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./reducers/rootReducer";
 import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
 import GameController from "./components/GameController";
 import "./Game.css";
 function App() {
@@ -14,14 +14,8 @@ function App() {
   );
 }
 const rootElement = document.getElementById("root");
-const storeWithThunk = createStore(
-  rootReducer,
-  {},
-  applyMiddleware(ReduxThunk)
-);
+const storeWithThunk = createStore(rootReducer, applyMiddleware(ReduxThunk));
 ReactDOM.render(
-  <Provider store={storeWithThunk}>
-    <App />
-  </Provider>,
+  <Provider store={storeWithThunk}> <App /> </Provider>,
   rootElement
 );
