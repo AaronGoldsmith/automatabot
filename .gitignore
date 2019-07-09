@@ -1,2 +1,10 @@
+# dev
 node_modules
+package-lock.json
+
+# artifacts
 .DS_Store
+.idea
+
+# build folder and all subfolders
+build/
