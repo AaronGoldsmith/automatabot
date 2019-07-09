@@ -7,10 +7,9 @@ import { Provider } from "react-redux";
 import GameController from "./components/GameController";
 import "./Game.css";
 function App() {
-  const [running, setRunning] = useState(false)
   return (
     <div className="App">
-      <GameController running={running} toggleRun={()=>setRunning(!running)} />
+      <GameController />
     </div>
   );
 }

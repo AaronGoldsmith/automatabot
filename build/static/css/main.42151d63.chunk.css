@@ -1,0 +1,2 @@
+.cell{border:1px solid #000;width:5px;height:5px;background:#000;display:inline-block}.cell.o{background:#00f}.cell-row{padding:0;margin:0;display:flex}button{border:2px solid rgba(0,0,0,.25);border-radius:4px;box-shadow:none;min-width:150px;padding:5px 22px;margin:10px}button:hover{background:rgba(58,96,221,.07);-webkit-transition:border .1s ease-in;transition:border .1s ease-in;border:2px solid rgba(0,0,0,.6)}
+/*# sourceMappingURL=main.42151d63.chunk.css.map */
