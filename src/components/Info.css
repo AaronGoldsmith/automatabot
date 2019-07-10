@@ -1,11 +1,9 @@
 .rules {
-  display: grid;
-}
-.rules > * {
-  display: inline;
+  position: relative;
+  bottom: 20px;
+  z-index: -1;
 }
 
-button,
 .dflt-btn {
   border: 2px solid rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -15,7 +13,7 @@ button,
   width: auto;
   cursor: pointer;
 }
-button:hover,
+
 .dflt-btn:hover {
   background: rgba(58, 96, 221, 0.07);
   transition: 100ms border ease-in;
@@ -27,13 +25,10 @@ button:hover,
   font-size: 0.9em;
   color: blue;
 }
-.line {
-  position: inline-block;
-}
 
 .info {
-  box-sizing: border-box;
-  padding: 30px 10px;
+  /* box-sizing: border-box; */
+  padding: 20px 10px;
 }
 .info label {
   font-weight: bold;
@@ -51,7 +46,6 @@ button:hover,
   display: block;
   margin: 12px;
   text-decoration: underline;
-  text-align: center;
 }
 
 #detailName {
@@ -59,6 +53,7 @@ button:hover,
 }
 .detail-birth,
 .detail-survival {
+  position: relative;
   display: inline-grid;
 }
 .controls::after {
@@ -68,9 +63,9 @@ button:hover,
   z-index: 0;
 }
 .controls {
-  /* display: none; */
   cursor: pointer;
   position: absolute;
+  opacity: 0;
   top: calc(50%);
   left: calc(50% - 25px);
   width: 0px;
@@ -83,7 +78,7 @@ button:hover,
   box-shadow: 0px 0px 2px 3px green;
   opacity: 0.4;
 }
-
-/* .controls:hover {
-  opacity: 0.8;
-} */
+.long {
+  margin: 20px 0px;
+  position: absolute;
+}

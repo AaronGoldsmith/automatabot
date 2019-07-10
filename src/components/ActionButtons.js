@@ -10,7 +10,7 @@ export const Button = ({ handler, text }) => {
 export const ActionButtons = ({ send, run, next, ...props }) => {
   return (
     <div className="actnBtns">
-      <Button handler={next} text="new" />
+      <Button handler={next} text="random" />
       {/* <Button handler={run} text={props.running ? "stop" : "start"} /> */}
     </div>
   );

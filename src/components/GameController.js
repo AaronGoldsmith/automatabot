@@ -7,7 +7,6 @@ import { CellGrid, getNextBoard } from "./GameBoard";
 import { getGame, sendGame } from "../actions";
 import { ActionButtons } from "./ActionButtons";
 import InfoView from "./InfoView";
-import ControlSVG from "./svg/ControlSVG";
 class GameController extends React.Component {
   constructor(props) {
     super(props);
@@ -78,20 +77,13 @@ class GameController extends React.Component {
     return (
       <div className="appWrap">
         <label className="named">{rules ? rules.name : ""}</label>
-        <InfoView rules={rules} show={viewDetails}>
-          <CellGrid cells={cells} handleClick={this.handleRun} />
-        </InfoView>
-        <ActionButtons
-          send={this.handleSend}
-          // run={this.handleRun}
-          next={this.handleNext}
-          // running={running}
-        />
+        <ActionButtons send={this.handleSend} next={this.handleNext} />
+        <InfoView rules={rules} show={viewDetails} />
+        <CellGrid cells={cells} handleClick={this.handleRun} />
       </div>
     );
   }
 }
-// export default Game;
 function mapStateToProps(state) {
   return {
     Challenge: state.challenge
