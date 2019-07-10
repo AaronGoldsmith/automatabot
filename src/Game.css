@@ -5,11 +5,14 @@
 }
 .appWrap {
   text-align: center;
+  position: relative;
+  width: 80vw;
+  height: 75vh;
+  margin: 0px auto;
 }
 .cell {
   min-width: 5px;
   min-height: 5px;
-
   border: 1px solid transparent;
   background: rgba(200, 200, 200, 0.65);
   display: inline-block;
@@ -19,6 +22,7 @@
   background: blue;
 }
 .cellWrap {
+  position: relative;
   overflow: hidden;
   border: 3px solid rgba(0, 0, 0, 0.6);
   border-radius: 5px;
@@ -28,9 +32,23 @@
   opacity: 0.4;
   cursor: pointer;
 }
-
+.cellWrap:hover .controls {
+  z-index: 1;
+  transition: opacity 20ms ease-in;
+  opacity: 1;
+}
 .cell-row {
   padding: 0;
   margin: 0;
   display: flex;
+}
+.touchWrap {
+  position: relative;
+}
+.touchWrap:hover .controls {
+  z-index: 1;
+  opacity: 1;
+}
+.cellWrap:not(:hover) .controls {
+  z-index: -1;
 }

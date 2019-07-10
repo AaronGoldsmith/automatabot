@@ -20,7 +20,7 @@ function ViewDetails({ children }) {
   };
   return (
     <React.Fragment>
-      <span className="clickable" onClick={handleClick}>
+      <span className="clickable line" onClick={handleClick}>
         {detail ? "hide" : "view details"}
       </span>
       {detail && children}
@@ -32,7 +32,6 @@ const InfoView = ({ rules, show, children }) => {
   return (
     rules && (
       <div className="info">
-        <label className="named">{rules.name}</label>
         {children}
         <ViewDetails>
           <div className={`rules ${visible}`}>

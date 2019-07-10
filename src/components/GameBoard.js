@@ -15,7 +15,7 @@ export const CellGrid = ({ cells, handleClick }) => {
   if (cells) {
     return (
       <div className="touchWrap">
-        <ControlSVG onClick={() => handleClick()} />
+        <ControlSVG onClick={handleClick} />
         <div className="cellWrap">
           {cells.map((cellList, row) => (
             <CellRow key={row} cells={cellList} />
