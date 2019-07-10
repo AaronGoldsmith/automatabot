@@ -30,7 +30,6 @@
 }
 .cellWrap:hover .cell-row {
   opacity: 0.4;
-  cursor: pointer;
 }
 .cellWrap:hover .controls {
   z-index: 1;
@@ -38,6 +37,7 @@
   opacity: 1;
 }
 .cell-row {
+  background: white;
   padding: 0;
   margin: 0;
   display: flex;
@@ -49,6 +49,6 @@
   z-index: 1;
   opacity: 1;
 }
-.cellWrap:not(:hover) .controls {
+/* .cellWrap:not(:hover) .controls {
   z-index: -1;
-}
+} */
