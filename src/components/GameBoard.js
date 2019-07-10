@@ -27,6 +27,8 @@ export const CellGrid = ({ cells, handleClick }) => {
   return null;
 };
 
+export const generationView = generation => <p>generation: {generation}</p>;
+
 export const getNextBoard = challenge =>
   new Promise(resolve => {
     const cells = challenge.cells.map((_, row) => getNextRow(row, challenge));

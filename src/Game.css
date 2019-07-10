@@ -3,14 +3,10 @@
     "Helvetica Neue", sans-serif;
   padding: 50px;
 }
-/* .appWrap {
-  /* margin-left: 44%; */
-/* height: 100vh; */
-/* /overflow: scroll; */
 
 .cell {
-  min-width: 5px;
-  min-height: 5px;
+  min-width: 7px;
+  min-height: 7px;
   border: 1px solid transparent;
   background: rgba(200, 200, 200, 0.65);
   display: table-cell;
@@ -25,7 +21,7 @@
   border: 3px solid rgba(0, 0, 0, 0.6);
   border-radius: 5px;
   text-align: center;
-  margin: 0px auto;
+  margin: 20px auto;
 }
 .cellWrap:hover .cell-row {
   opacity: 0.4;
@@ -44,7 +40,6 @@
 .touchWrap {
   position: relative;
   width: auto;
-  height: 100px;
 }
 .touchWrap:hover .controls {
   z-index: 1;
