@@ -62,7 +62,7 @@ function getNeighbors(row, col, cells) {
   for (let i = row - 1; i <= row + 1; i++) {
     for (let j = col - 1; j <= col + 1; j++) {
       if (row !== i || col !== j) {
-        if (row > 0 && j >= 0 && i < size && j < length)
+        if (row >= 0 && j >= 0 && i < size && j < length)
           neighbors.push({ x: i, y: j });
       }
     }

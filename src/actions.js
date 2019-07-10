@@ -1,22 +1,22 @@
-// TODO: determine why longer boards (vs taller) break prog
-//
 import axios from "axios";
 import {
   GET_ANY,
   GET_RULES,
   SET_PATH,
   SET_RESULT,
-  base_api
+  base_api,
+  axios_post,
+  axios_get
 } from "./constants";
-const path = "/automatabot/challenges/new"; //   or new
+const bot = "automatabot";
+const path = "/challenges/new"; //   or new
 const rules = "/automatabot/rules";
 const headers = { "content-type": "application/json" };
 
-export function getGame() {
-  const PATH = `${base_api}${path}`;
+export function getAnyGame() {
+  const PATH = `${base_api}/${bot}/${path}`;
   return dispatch => {
-    axios
-      .get(PATH, { headers })
+    axios_get(PATH, { headers })
       .then(response => {
         dispatch({
           type: GET_ANY,
@@ -37,24 +37,25 @@ export function getRules() {
     axios
       .get(PATH, { headers })
       .then(response => {
-        console.log(response.data);
         dispatch({
           type: GET_RULES,
-          challenge: response.data
+          rules: response.data
         });
       })
       .catch(error => console.log(error));
   };
 }
 
-export function sendGame(url, data) {
-  return dispatch => {
-    axios
-      .post(url, data, { headers })
+export function sendGame(url, body) {
+  const URL = `${base_api}${url}`;
+  console.log(body);
+  return dispatch =>
+    axios_post(URL, body, { headers })
       .then(response => {
-        console.log(response);
-        dispatch({ type: SET_RESULT, data: response.result });
+        dispatch({
+          type: SET_RESULT,
+          action: response.data
+        });
       })
       .catch(error => console.log(error));
-  };
 }

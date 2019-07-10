@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ControlSVG from "./svg/ControlSVG";
 import "./Info.css";
 
 const InfoDetail = ({ name, arr }) => {

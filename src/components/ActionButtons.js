@@ -7,11 +7,12 @@ export const Button = ({ handler, text }) => {
     </button>
   );
 };
-export const ActionButtons = ({ restart, run, next }) => {
+export const ActionButtons = ({ restart, ageToCompletion, next }) => {
   return (
     <div className="actnBtns">
       <Button handler={next} text="random" />
       <Button handler={restart} text={"replay"} />
+      <Button handler={ageToCompletion} text={"submit"} />
     </div>
   );
 };

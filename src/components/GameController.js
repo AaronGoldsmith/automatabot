@@ -4,7 +4,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CellGrid, getNextBoard, generationView } from "./GameBoard";
-import { getGame, getRules, sendGame } from "../actions";
+import { getAnyGame, getRules, sendGame } from "../actions";
 import { ActionButtons } from "./ActionButtons";
 import InfoView from "./InfoView";
 class GameController extends React.Component {
@@ -19,14 +19,16 @@ class GameController extends React.Component {
   }
 
   handleSend = () => {
-    const { url, challenge } = this.state;
+    const { URL, challenge } = this.state;
     const { cells } = challenge;
-    this.props.sendGame(url, { cells });
+    console.log(URL);
+    this.props.sendGame(URL, cells);
   };
 
   updateBoard = () => {
     const { challenge, generation } = this.state;
     Promise.resolve(getNextBoard(challenge)).then(challenge => {
+      console.log(challenge);
       const gen = generation + 1;
       this.setState({ challenge, generation: gen });
     });
@@ -35,7 +37,7 @@ class GameController extends React.Component {
   tick = () => {
     const { running } = this.state;
     if (running) {
-      this.timer = setInterval(this.updateBoard, 100);
+      this.timer = setInterval(this.updateBoard, 200);
     } else {
       clearInterval(this.timer);
     }
@@ -43,28 +45,38 @@ class GameController extends React.Component {
 
   ageToCompletion = () => {
     const { challenge, generation } = this.state;
-    if (generation < challenge.generation) {
-      this.updateBoard().then(this.ageToCompletion());
+    while (generation < challenge.generation) {
+      this.updateBoard();
     }
+    this.handleSend();
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { Challenge } = this.props;
+    const { Challenge, RuleList, URL } = this.props;
     if (Challenge !== prevProps.Challenge && Challenge) {
       this.setState({ challenge: Challenge });
     }
     if (prevState.running !== this.state.running) {
       this.tick();
     }
-  }
-  // on mount: initialize and run
-  componentDidMount() {
-    this.props.getRules();
-    this.handleNext();
+    if (prevProps.RuleList !== RuleList && RuleList) {
+      this.setState({ ruleList: RuleList });
+    }
+    if (prevProps.URL !== URL && URL) {
+      this.setState({ URL: `${URL}` });
+    }
   }
 
+  // on mount: initialize and run
+  componentDidMount() {
+    this.setup();
+  }
+  setup = () => {
+    this.props.getRules();
+    this.props.getAnyGame();
+  };
   handleNext = () => {
-    this.props.getGame();
+    this.props.getAnyGame();
   };
   restartBoard = () => {
     this.setState({ challenge: this.props.Challenge, generation: 0 });
@@ -78,32 +90,34 @@ class GameController extends React.Component {
     const { challenge, viewDetails, generation } = this.state;
     const rules = challenge ? challenge.rules : null;
     const cells = challenge ? challenge.cells : null;
-    const age = generation ? generation : 0;
-
     return (
       <div className="appWrap">
         <label className="named">{rules ? rules.name : ""}</label>
         <ActionButtons
           send={this.handleSend}
-          run={this.handleRun}
+          ageToCompletion={this.ageToCompletion}
           restart={this.restartBoard}
           next={this.handleNext}
         />
         <CellGrid cells={cells} handleClick={this.handleRun} />
         <InfoView rules={rules} show={viewDetails}>
-          {generationView(age)}
+          {generationView(generation)}
         </InfoView>
       </div>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     Challenge: state.challenge,
-    ruleList: state.ruleList
+    RuleList: state.ruleList,
+    URL: state.path,
+    Result: state.result
   };
 }
+
 export default connect(
   mapStateToProps,
-  { getGame, getRules, sendGame }
+  { getAnyGame, getRules, sendGame }
 )(GameController);

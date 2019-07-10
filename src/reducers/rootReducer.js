@@ -8,7 +8,12 @@ import {
 
 //  setup for generic reducer configuration
 export default function(
-  state = { challenge: {}, path: undefined, result: undefined },
+  state = {
+    challenge: undefined,
+    path: undefined,
+    result: undefined,
+    ruleList: undefined
+  },
   action
 ) {
   switch (action.type) {
