@@ -1,5 +1,5 @@
 // TODO: determine why longer boards (vs taller) break prog
-//          
+//
 import axios from "axios";
 import { GET_CHALLENGE, SET_PATH, SET_RESULT } from "./constants";
 const domain = "https://api.noopschallenge.com";
@@ -28,12 +28,12 @@ export function getGame() {
 
 export function sendGame(url, data) {
   return dispatch => {
-    axios.post(url, data, { headers })
+    axios
+      .post(url, data, { headers })
       .then(response => {
         console.log(response);
-        dispatch({type: SET_RESULT,
-        data: response.result})
+        dispatch({ type: SET_RESULT, data: response.result });
       })
       .catch(error => console.log(error));
-  }
+  };
 }
